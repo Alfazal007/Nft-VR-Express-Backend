@@ -27,7 +27,7 @@ app.use(
 app.use(express.static("public")); // static files which anyone can access
 app.use(cookieParser()); // get cookies from browser and also to set it
 
-app.get("/api/something", (req, res) => {
+app.get("/api", (req, res) => {
     res.status(200).json({
         message: "Up and running"
     });
