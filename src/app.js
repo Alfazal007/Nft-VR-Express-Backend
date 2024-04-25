@@ -27,7 +27,11 @@ app.use(
 app.use(express.static("public")); // static files which anyone can access
 app.use(cookieParser()); // get cookies from browser and also to set it
 
-
+app.get("/", (req, res) => {
+    res.status(200).json({
+        message: "Up and running"
+    });
+});
 const { nftRouter } = require("./routes/nft.routes.js");
 app.use("/nft-vr/service/nft", nftRouter);
 
