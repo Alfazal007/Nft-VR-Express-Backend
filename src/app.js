@@ -27,18 +27,18 @@ app.use(
 app.use(express.static("public")); // static files which anyone can access
 app.use(cookieParser()); // get cookies from browser and also to set it
 
-app.get("/", (req, res) => {
+app.get("/api/something", (req, res) => {
     res.status(200).json({
         message: "Up and running"
     });
 });
 const { nftRouter } = require("./routes/nft.routes.js");
-app.use("/nft-vr/service/nft", nftRouter);
+app.use("/api/nft-vr/service/nft", nftRouter);
 
 const { aiRouter } = require("./routes/ai.routes.js");
-app.use("/nft-vr/service/ai", aiRouter);
+app.use("/api/nft-vr/service/ai", aiRouter);
 
 const { artRouter } = require("./routes/arts.routes.js");
-app.use("/nft-vr/service/art", artRouter);
+app.use("/api/nft-vr/service/art", artRouter);
 
 module.exports = { app };
