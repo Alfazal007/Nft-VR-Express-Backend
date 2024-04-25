@@ -1,4 +1,4 @@
-import { asyncHandler } from "../../utils/asyncHandler.js";
+const { asyncHandler } = require("../../utils/asyncHandler.js");
 
 const getAllArts = asyncHandler(async (req, res) => {
     const arts = [
@@ -22,4 +22,4 @@ const getAllArts = asyncHandler(async (req, res) => {
     return res.status(200).json(arts);
 });
 
-export { getAllArts };
+module.exports = { getAllArts };

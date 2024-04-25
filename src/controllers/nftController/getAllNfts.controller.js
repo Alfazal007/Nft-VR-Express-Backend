@@ -1,7 +1,7 @@
-import { ethers } from "ethers";
-import { MarketAddress, NFT_MARKETPLACE_ABI } from "../../constants.js";
-import axios from "axios";
-import { asyncHandler } from "../../utils/asyncHandler.js";
+const { ethers } = require("ethers");
+const { MarketAddress, NFT_MARKETPLACE_ABI } = require("../../constants.js");
+const axios = require("axios");
+const { asyncHandler } = require("../../utils/asyncHandler.js");
 
 const getAllNfts = asyncHandler(async (req, res) => {
     const provider = new ethers.JsonRpcProvider(
@@ -30,4 +30,4 @@ const getAllNfts = asyncHandler(async (req, res) => {
     return res.status(200).json(listedNfts);
 });
 
-export { getAllNfts };
+module.exports = { getAllNfts };

@@ -1,4 +1,4 @@
-import { app } from "./app.js";
+const { app } = require("./app.js");
 
 app.get("/nft-vr/service/", (req, res) => {
     return res.status(200).json({ message: "Working" });
@@ -12,4 +12,4 @@ const startServer = () => {
     });
 };
 
-export { startServer };
+module.exports = { startServer, app };

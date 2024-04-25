@@ -1,10 +1,10 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-export const DB_NAME = "nftvrbackend1";
-export const MarketAddress = "0xbEeCB9EF39c565d4683d50d35420EFA4e27e002d";
-export const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const DB_NAME = "nftvrbackend1";
+const MarketAddress = "0xbEeCB9EF39c565d4683d50d35420EFA4e27e002d";
 
-export const NFT_MARKETPLACE = {
+
+const NFT_MARKETPLACE = {
     "_format": "hh-sol-artifact-1",
     "contractName": "NftMarketPlace",
     "sourceName": "contracts/NftMarketPlace.sol",
@@ -792,4 +792,12 @@ export const NFT_MARKETPLACE = {
 };
 
 
-export const NFT_MARKETPLACE_ABI = NFT_MARKETPLACE.abi;
+const NFT_MARKETPLACE_ABI = NFT_MARKETPLACE.abi;
+
+
+module.exports = {
+    NFT_MARKETPLACE,
+    DB_NAME,
+    MarketAddress,
+    NFT_MARKETPLACE_ABI
+};

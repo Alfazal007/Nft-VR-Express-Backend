@@ -1,8 +1,11 @@
-import { genAI } from "../../constants.js";
-import { ApiResponse } from "../../utils/ApiResponse.js";
-import { asyncHandler } from "../../utils/asyncHandler.js";
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+const { ApiResponse } = require("../../utils/ApiResponse.js");
+const { asyncHandler } = require("../../utils/asyncHandler.js");
+
 
 const getAIResponse = asyncHandler(async (req, res) => {
+    const geminiApiKey = process.env.GEMINI_API_KEY;
+    genAI = new GoogleGenerativeAI(geminiApiKey);
     const { question } = req.body;
     if (!question || question.length < 2) {
         return res.status(200).json(
@@ -15,7 +18,7 @@ const getAIResponse = asyncHandler(async (req, res) => {
         const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
         const result = await model.generateContent(
-            question + "tell me in a single para under 100 characters"
+            question + ", tell me in under 100 characters only plain string no line spaces. Dont add any special characters please."
         );
         const response = await result.response;
         const text = response.text();
@@ -28,4 +31,4 @@ const getAIResponse = asyncHandler(async (req, res) => {
     }
 });
 
-export { getAIResponse };
+module.exports = { getAIResponse };

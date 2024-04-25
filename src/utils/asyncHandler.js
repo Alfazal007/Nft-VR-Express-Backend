@@ -5,4 +5,4 @@ const asyncHandler = (requestHandlerFunction) => {
     };
 };
 
-export { asyncHandler };
+module.exports = { asyncHandler };
