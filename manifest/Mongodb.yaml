@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  labels:
+    app: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:latest # Use the MongoDB image
+          ports:
+            - containerPort: 27017 # MongoDB default port
+          imagePullPolicy: Always
+          env:
+            - name: MONGO_CONNECTION_STRING # Define the connection string as an environment variable
+              valueFrom:
+                secretKeyRef:
+                  name: nft-vr-service-secret
+                  key: connection_string
+          volumeMounts:
+            - mountPath: /data/db # MongoDB data directory
+              name: mongodb-data
+      volumes:
+        - name: mongodb-data
+          persistentVolumeClaim:
+            claimName: mongodb-pv-claim # Use the PVC for MongoDB data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-service
+spec:
+  selector:
+    app: mongodb
+  ports:
+    - protocol: TCP
+      port: 27017 # MongoDB default port
+      targetPort: 27017
